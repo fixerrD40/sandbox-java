@@ -1,4 +1,4 @@
-package introductory_problems;
+package cses.introductory_problems;
 
 public class TwoKnights {
     static void main(String[] args) {

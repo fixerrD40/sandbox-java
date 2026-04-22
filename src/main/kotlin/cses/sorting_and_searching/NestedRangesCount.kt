@@ -1,4 +1,4 @@
-package org.example
+package cses.sorting_and_searching
 
 fun main() {
     val n = readln().toInt()

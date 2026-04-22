@@ -1,3 +1,5 @@
+package cses.range_queries
+
 fun main() {
 //    val (n, q) = readln().split(" ").map { it.toInt() }
 //    val numbers = readln().split(" ").map { it.toInt() }

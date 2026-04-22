@@ -1,3 +1,5 @@
+package cses.dynamic_programming
+
 fun main() {
 //    val n = readln().toInt()
     val n = 27

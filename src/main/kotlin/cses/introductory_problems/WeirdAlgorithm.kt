@@ -1,4 +1,4 @@
-package org.example
+package cses.introductory_problems
 
 fun main() {
     val n = readln().toInt()

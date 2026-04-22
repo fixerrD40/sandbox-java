@@ -1,4 +1,4 @@
-package range_queries;
+package cses.range_queries;
 
 import java.io.*;
 import java.util.*;

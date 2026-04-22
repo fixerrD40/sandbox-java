@@ -1,45 +1,48 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     kotlin("jvm") version "2.1.10"
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation(kotlin("test"))
+java {
+    toolchain { languageVersion.set(JavaLanguageVersion.of(21)) }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
+// 1. Task for Java
 tasks.register<JavaExec>("execute") {
     group = "application"
-    dependsOn("classes")
-    
+    dependsOn("compileJava")
     val scriptProperty = providers.gradleProperty("script")
-    
     mainClass.set(scriptProperty)
     
-    classpath = sourceSets["main"].runtimeClasspath
+    val javaClasses = layout.buildDirectory.dir("classes/java/main")
+    classpath = files(javaClasses) + sourceSets.main.get().runtimeClasspath
+    
     standardInput = System.`in`
+}
 
-    doFirst {
-        if (!scriptProperty.isPresent) {
-            throw GradleException("ERROR: You must provide the class. Example:\n" +
-                  "./gradlew execute -Pscript=cses.introductory_problems.Permutations")
-        }
-        println("Starting: ${scriptProperty.get()}")
-    }
+// 2. Task for Kotlin
+tasks.register<JavaExec>("executeKotlin") {
+    group = "application"
+    dependsOn("compileKotlin")
+    val scriptProperty = providers.gradleProperty("script")
+    mainClass.set(scriptProperty)
+    
+    val kotlinClasses = layout.buildDirectory.dir("classes/kotlin/main")
+    classpath = files(kotlinClasses) + sourceSets.main.get().runtimeClasspath
+    
+    standardInput = System.`in`
 }

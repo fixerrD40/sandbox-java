@@ -1,3 +1,5 @@
+package cses.tree_algorithms
+
 fun main() {
     //val n = readln().toInt()
     //val directReports = readln().split(" ").map { it.toInt() }

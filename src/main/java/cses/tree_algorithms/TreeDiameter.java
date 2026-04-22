@@ -1,4 +1,4 @@
-package tree_algorithms;
+package cses.tree_algorithms;
 
 import java.io.BufferedReader;
 import java.io.IOException;

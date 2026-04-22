@@ -1,3 +1,5 @@
+package cses.sorting_and_searching
+
 fun main() {
 //    val (n, x) = readln().split(" ").map { it.toInt() }
 //    val childrenWeights = readln().split(" ").map { it.toInt() }

@@ -1,4 +1,4 @@
-package introductory_problems;
+package cses.introductory_problems;
 
 import java.util.ArrayList;
 import java.util.List;

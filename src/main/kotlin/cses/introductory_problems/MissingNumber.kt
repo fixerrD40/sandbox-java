@@ -1,3 +1,5 @@
+package cses.introductory_problems
+
 import kotlin.math.ceil
 
 fun main() {

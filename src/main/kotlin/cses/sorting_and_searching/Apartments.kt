@@ -1,3 +1,5 @@
+package cses.sorting_and_searching
+
 fun main() {
 //    val (n, m ,k) = readln().split(" ").map { it.toInt() }
 //    val desiredApartments = readln().split(" ").map { it.toInt() }.sorted()

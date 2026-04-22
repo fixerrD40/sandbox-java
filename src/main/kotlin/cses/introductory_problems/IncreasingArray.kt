@@ -1,4 +1,4 @@
-package introductory_problems
+package cses.introductory_problems
 
 fun main() {
 //    val n = readln().toInt()

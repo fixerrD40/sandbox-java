@@ -1,3 +1,5 @@
+package cses.tree_algorithms
+
 fun main() {
 //    val n = readln().toInt()
 //    val edges = mutableListOf<Pair<Int, Int>>()

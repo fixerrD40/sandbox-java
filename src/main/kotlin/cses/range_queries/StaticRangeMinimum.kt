@@ -1,3 +1,5 @@
+package cses.range_queries
+
 import kotlin.math.min
 
 fun main() {

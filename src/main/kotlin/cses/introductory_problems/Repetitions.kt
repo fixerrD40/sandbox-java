@@ -1,3 +1,5 @@
+package cses.introductory_problems
+
 fun main() {
 //    val dnaStrand = readln()
     val dnaStrand = "ATTCGGGA"

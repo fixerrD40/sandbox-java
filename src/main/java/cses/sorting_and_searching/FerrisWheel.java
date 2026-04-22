@@ -1,4 +1,4 @@
-package sorting_and_searching;
+package cses.sorting_and_searching;
 
 import java.io.BufferedReader;
 import java.io.IOException;

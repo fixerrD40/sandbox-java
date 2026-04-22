@@ -1,3 +1,5 @@
+package cses.dynamic_programming
+
 fun main() {
 //    val (_, x) = readln().split(" ").map { it.toInt() }
 //    val denoms = readln().split(" ").map { it.toInt() }

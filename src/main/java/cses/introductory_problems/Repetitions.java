@@ -1,4 +1,4 @@
-package introductory_problems;
+package cses.introductory_problems;
 
 import java.io.BufferedReader;
 import java.io.IOException;

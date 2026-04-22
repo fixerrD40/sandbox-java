@@ -1,3 +1,4 @@
+package cses.dynamic_programming
 
 fun main() {
     val n = 4
