@@ -12,7 +12,7 @@ fun main() {
     println(answer)
 }
 
-fun solution(n: Int, numbers: List<Int>): Int {
+private fun solution(n: Int, numbers: List<Int>): Int {
     var result = 0
     var previous = numbers.first()
 
