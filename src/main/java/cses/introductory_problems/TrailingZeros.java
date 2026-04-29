@@ -4,23 +4,25 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class BitStrings {
-  public static final long MODULO = 1_000_000_007L;
-  
+public class TrailingZeros {
+
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+    
     long n = Long.parseLong(br.readLine());
 
-    long result = moduloPow(2, n);
+    long solution = legendresFormula(5, n);
 
-    System.out.println(result);
+    System.out.println(solution);
   }
   
-  private static long moduloPow(long base, long pow) {
-    long result = 1;
-    for (int i = 0; i < pow; i++) {
-      result = (result * base) % MODULO;
+  private static long legendresFormula(long p, long n) {
+    long i = n;
+    long result = 0;
+
+    while (i >= p) {
+      i /= p;
+      result += i;
     }
 
     return result;
