@@ -19,7 +19,7 @@ public class JosephusProblemI {
   }
 
   // Naive
-  public static String solution(int n) {
+  private static String solution(int n) {
     boolean[] children = new boolean[n];
     boolean skip = true;
     int next = 0;
@@ -53,7 +53,7 @@ public class JosephusProblemI {
   }
   
   // Gemini
-  public static String solution2(int n) {
+  private static String solution2(int n) {
     Queue<Integer> queue = new ArrayDeque<>(n);
 
     for (int i = 1; i <= n; i++) {
