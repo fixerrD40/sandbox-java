@@ -3,9 +3,11 @@ package cses.sorting_and_searching;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class SubarraySumsI {
+public class SubarraySumsII {
 
   // O(n)
   public static void main(String[] args) throws IOException {
@@ -18,26 +20,23 @@ public class SubarraySumsI {
     
     in = new StringTokenizer(br.readLine());
 
-    int[] values = new int[n];
-    int sum = 0;
-    int lower = 0;
-    
-    int result = 0;
+    Map<Long, Integer> sums = new HashMap<>();
+    long currentSum = 0;
+
+    sums.put(currentSum, 1);
+
+    long result = 0;
     for (int i = 0; i < n; i++) {
       int value = Integer.parseInt(in.nextToken());
-      values[i] = value;
+      currentSum += value;
 
-      sum += value;
-      if (sum > x) {
-        while (sum > x && lower < n) {
-          sum -= values[lower];
-          lower++;
-        }
-      }
+      // In this form, we only track prior sums.
+      // If any of those are x less, subarray between is x.
+      long sought = currentSum - x;
 
-      if (sum == x) {
-        result++;
-      }
+      result += sums.getOrDefault(sought, 0);
+
+      sums.compute(currentSum, (k,v) -> (v == null) ? 1 : v + 1);
     }
     
     System.out.println(result);
