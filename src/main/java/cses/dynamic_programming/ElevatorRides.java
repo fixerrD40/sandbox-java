@@ -17,6 +17,10 @@ public class ElevatorRides {
    * into all configurations of prior passengers and particularly their last car.
    *
    * In this way our dp is able to progress towards the optimal configuration.
+   *
+   * I think in both cases where I failed, I should've really tried to drill into
+   * the problem space. Until I find a shortcut, combinations is gonna mean a bitmask
+   * is gonna mean 2^n.
    */
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
