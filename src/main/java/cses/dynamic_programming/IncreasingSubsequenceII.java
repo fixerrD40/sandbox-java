@@ -7,17 +7,19 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
-public class IncreasingSubsequence {
+public class IncreasingSubsequenceII {
+  private static final int MODULO = 1_000_000_007;
 
   /*
    * O(nlogn)
    *
-   * At any given point, the longest increasing subsequence is the max of prior, lesser points' +1
-   * Coordinate compression is used to reduce search space n -> unique n.
-   * the [dp] is implemented as a Fenwick Tree to improve search unique n -> log unique n
+   * Luckily, performing the prior IncreasingSubsequence the hard way made this one simpler.
    *
-   * I'm including an alternateSolution that shows better understanding of the problem--
-   * achieving the same complexity more simply by eagerly pruning inconsequential tails.
+   * Shift the Fenwick Tree's purpose: instead of tracking the maximum length via Math.max,
+   * it now maintains the running summation of all valid subsequence paths (MODULO applied).
+   *
+   * For each element, a prefix query on lesser coordinates yields the number of valid prefixes.
+   * Adding 1 accounts for starting a new sequence at the current element.
    */
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,35 +41,18 @@ public class IncreasingSubsequence {
     
     FenwickTree dp = new FenwickTree(coords.length);
 
-    int result = 0;
     for (int i = 0; i < n; i++) {
       int compressedValue = Arrays.binarySearch(coords, values[i]) + 1;
 
-      int maxSubsequence = dp.query(compressedValue - 1);
+      int subsequences = (dp.query(compressedValue-1)+1) % MODULO;
 
-      dp.update(compressedValue, maxSubsequence+1);
-      result = Math.max(result, maxSubsequence+1);
+      dp.update(compressedValue, subsequences);
     }
 
-    System.out.println(result);
+    System.out.println(dp.query(coords.length));
   }
 
-  public static int alternateSolution(int n, int[] values) {
-    int[] tails = new int[n];
-    int len = 0;
-
-    for (int x : values) {
-        int i = Arrays.binarySearch(tails, 0, len, x);
-        if (i < 0) i = -(i + 1); // Get insertion point from ret
-        
-        tails[i] = x;
-        if (i == len) len++;
-    }
-
-    return len;
-  }
-
-  // Fenwick Tree (Binary Indexed Tree) to store max DP values
+  // Fenwick Tree (Binary Indexed Tree) to store num subsequences
   private static class FenwickTree {
     int[] tree;
     int size;
@@ -77,20 +62,23 @@ public class IncreasingSubsequence {
       this.tree = new int[size + 1];
     }
 
-    // Update the max value at a specific rank
+    // Add value to a specific index
     void update(int index, int value) {
       for (; index <= size; index += index & -index) {
-        tree[index] = Math.max(tree[index], value);
+        tree[index] += value;
+        if (tree[index] >= MODULO) {
+          tree[index] -= MODULO;
+        }
       }
     }
 
-    // Query the maximum value from rank 1 up to 'index'
+    // Query the sum from index 1 up to 'index'
     int query(int index) {
-      int maxVal = 0;
+      int sum = 0;
       for (; index > 0; index -= index & -index) {
-        maxVal = Math.max(maxVal, tree[index]);
+        sum = (sum + tree[index]) % MODULO;
       }
-      return maxVal;
+      return sum;
     }
   }
 }
